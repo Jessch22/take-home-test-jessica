@@ -51,15 +51,15 @@ export default async function UserDetailPage({ params }: { params: { id: string 
           </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-blue-700 pt-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-blue-500 pt-8">
           <div>
             <h2 className="text-xs font-bold uppercase text-blue-500">Contact</h2>
             <div className="text-sm">
-              <h4 className="text-blue-300 pt-4">Email</h4>
+              <h4 className="text-blue-500 pt-4">Email</h4>
               <a href={`mailto:${user.email}`} className="hover:underline">{user.email}</a>
-              <h4 className="text-blue-300 pt-4">Phone</h4>
+              <h4 className="text-blue-500 pt-4">Phone</h4>
               <p className="hover:underline">{user.phone}</p>
-              <h4 className="text-blue-300 pt-4">Website</h4>
+              <h4 className="text-blue-500 pt-4">Website</h4>
               <a href={`https://${user.website}`} target="_blank" className="hover:underline">{user.website}</a>
             </div>
           </div>
@@ -81,7 +81,7 @@ export default async function UserDetailPage({ params }: { params: { id: string 
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-blue-700 pt-8 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-blue-500 pt-8 mt-12">
           <div>
             <h2 className="text-xs font-bold uppercase text-blue-500 mb-4">Task List (Todos)
             <span className="mx-4 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">

@@ -8,9 +8,9 @@ export default function BackButton() {
   return (
     <button
       onClick={() => router.back()}
-      className="text-sm text-gray-300 hover:underline cursor-pointer bg-transparent border-none p-0 mb-4"
+      className="text-sm text-blue-500 hover:underline cursor-pointer bg-transparent border-none p-0 mb-4"
     >
-      &larr; Back to list
+      &larr; Back
     </button>
   );
 }

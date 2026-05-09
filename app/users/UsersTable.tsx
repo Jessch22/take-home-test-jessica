@@ -132,7 +132,7 @@ export default function UsersTable({ users }: { users: EnrichedUser[] }) {
             <tr> 
               {(["name", "email", "website", "totalPosts", "completedTodos", "pendingTodos"] as SortKey[]).map((col) => (
                 <th key={col} onClick={() => updateSort(col)}
-                className="text-left cursor-pointer select-none hover:bg-blue-700 group transition-colors"
+                className="text-left cursor-pointer select-none hover:bg-blue-500 group transition-colors"
                 >
                   <div className="flex gap-2 px-4 py-2 text-sm">
                     {col.charAt(0).toUpperCase() + col.slice(1)}
@@ -149,7 +149,7 @@ export default function UsersTable({ users }: { users: EnrichedUser[] }) {
               </tr>
             ) : (
               processedUsers.map((user) => (
-                <tr key={user.id} className="hover:bg-blue-700 border-t cursor-pointer transition-colors" 
+                <tr key={user.id} className="hover:bg-blue-500 border-t cursor-pointer transition-colors" 
                 onClick={()=> router.push(`/users/${user.id}`)}>
                   <td className="px-4 py-2 truncate">{user.name}</td>
                   <td className="px-4 py-2 truncate">{user.email}</td>
