@@ -9,7 +9,7 @@ export default function Home() {
           <h3 className="text-2xl font-bold">
             Tech Stack
           </h3>
-          <ul className="mt-4 list-none space-y-2 pl-6">
+          <ul className="mt-4 list-none space-y-2">
             <li>Next.js v16.2.5</li>
             <li>Typescript</li>
             <li>Tailwind CSS</li>
@@ -17,7 +17,7 @@ export default function Home() {
           </ul>
         </div>
 
-        <a className="m-8 flex h-12 items-center justify-center rounded-full border border-solid px-5 transition-colors hover:bg-blue-700"
+        <a className="m-8 flex h-12 items-center justify-center rounded-full border border-solid px-5 transition-colors hover:bg-blue-500"
           href="/users"
           rel="noopener noreferrer">
           Go to User Page
