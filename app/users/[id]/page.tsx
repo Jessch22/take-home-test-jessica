@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from 'next';
 
 type User = {
   id:string
@@ -35,6 +36,17 @@ async function getUserDetail(id:string):Promise<User>{
   }
 
   return fetchDetail.json();
+}
+
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const { id } = await params;
+  const user = await getUserDetail(id);
+
+  return {
+    title: `User detail - ${user.name}`,
+    description: `User detail - ${user.name} from ${user.company.name}`
+  }
 }
 
 
