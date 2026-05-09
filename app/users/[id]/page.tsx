@@ -1,6 +1,6 @@
-import Link from "next/link";
 import type { Metadata } from 'next';
 import { User, Post, Todo } from "../dataType";
+import BackButton from "./BackButton";
 
 async function getUserDetail(id:string){
   // Fetch data
@@ -39,7 +39,7 @@ export default async function UserDetailPage({ params }: { params: { id: string 
 
   return (
     <main className="max-w-4xl mx-auto py-16 px-6">
-      <Link href="/users" className="text-sm text-gray-300 hover:underline">&larr; Back to list</Link>
+      <BackButton/>
 
       <div>
         <header>

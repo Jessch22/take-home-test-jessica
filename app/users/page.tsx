@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import UsersTable from "./UsersTable";
 import { User, Post, Todo, EnrichedUser } from "./dataType";
 import Link from "next/link";
+import BackButton from "./[id]/BackButton";
 
 async function getData(): Promise<{ enrichedUsers: EnrichedUser[] }> {
   const [fetchUsers, fetchPosts, fetchTodos] = await Promise.all([
@@ -37,7 +38,7 @@ export default async function UsersPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-8 py-12">
-      <Link href="/" className="text-sm text-gray-300 hoverList:underline">&larr; Back</Link>
+      <BackButton/>
       <h1 className="text-2xl font-semibold my-2">Users Operations</h1>
       <p className="text-sm text-gray-500 mb-4">
         Source: <a href="https://jsonplaceholder.typicode.com" target="_blank" className="hover:underline">jsonplaceholder.typicode.com</a>
