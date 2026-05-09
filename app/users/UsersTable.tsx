@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Define type data
 type User = {
@@ -51,6 +52,8 @@ export default function UsersTable({ users }: { users: User[] }) {
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("name");
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
+
+  const router = useRouter();
 
   // Filter berdasarkan name atau email
   const filtered = users.filter(
@@ -115,7 +118,8 @@ export default function UsersTable({ users }: { users: User[] }) {
               </tr>
             ) : (
               sorted.map((user) => (
-                <tr key={user.id} className="hover:bg-blue-700 border-t ">
+                <tr key={user.id} className="hover:bg-blue-700 border-t cursor-pointer" 
+                onClick={()=> router.push(`/users/${user.id}`)}>
                   <td className="px-4 py-1">{user.name}</td>
                   <td className="px-4 py-1">{user.email}</td>
                   <td className="px-4 py-1">{user.website}</td>
