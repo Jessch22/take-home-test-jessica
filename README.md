@@ -1,29 +1,44 @@
 # Mampu.io Frontend Take Home Test
-oleh Jessica Ho
+by Jessica Ho
 
-Project ini dibuat untuk memenuhi persyaratan seleksi di PT Mampu Inovasi Digital.
+This project was created as part of the Frontend Engineer recruitment process at PT Mampu Inovasi Digital.
 
 ## Tech Stack
-- Next.js typescript
+- Next.js
+- TypeScript
 - Tailwind CSS
 
-## How to run
-1. Install dependency:
-`npm install`
-atau
-`pnpm install`
+## Features
+- Fetch users, posts, and todos data
+- Display user activity signals on the users table
+- Search users by name or email
+- Sorting by:
+  - Name
+  - Email
+  - Website
+  - Total posts
+  - Completed todos
+  - Pending todos
+- User detail page with:
+  - Contact information
+  - Address
+  - Company information
+  - Posts
+  - Todos
+- Responsive layout for desktop and mobile
+- SEO optimization using generateMetadata
+- Loading state using skeleton screens
+- Error handling state
 
-2. Run server:
-`npm run dev`
-atau
-`pnpm dev`
+## How to Run
+Install dependencies:
+```npm install``` or ```pnpm install```
 
-Proyek ini telah memenuhi:
-1. Fetch data users, posts, dan todos untuk menampilkan kontak dan aktivitas user pada tabel
-3. Fitur pencarian berdasarkan nama/email
-4. Fitur sorting berdasarkan nama, email, website, total post, dan completed todos, dan pending todos
-5. Navigasi ke halaman detail pengguna berisi kontak, alamat, perusahaan, postingan, dan todo user
-6. Tampilan responsif pada layar desktop dan mobile
-7. Implementasi generateMetadata untuk optimasi SEO
-8. Loadin state berupa skeleton screens
-9. Error state
+Run development server:
+```npm run dev``` or ```pnpm dev```
+
+Open:
+http://localhost:3000
+
+### Notes:
+Some additional improvements such as testing and optional bonus features are not fully implemented within the given timeframe.
