@@ -1,48 +1,31 @@
-import Link from "next/link";
 import type { Metadata } from 'next';
+import { User, Post, Todo } from "../dataType";
+import BackButton from "./BackButton";
 
-type User = {
-  id:string
-  name:string
-  username:string
-  email:string
-  address: {
-    street:string
-    suite:string
-    city:string
-    zipcode:string
-    geo: {
-      lat:string
-      lng:string
-    }
-  }
-  phone:string
-  website:string
-  company:{
-    name:string
-    catchPhrase:string
-    bs:string
-  }
-}
-
-async function getUserDetail(id:string):Promise<User>{
+async function getUserDetail(id:string){
   // Fetch data
-  const fetchDetail = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`,{
-    cache: "no-store",
-  });
+  const [fetchUsers, fetchPosts, fetchTodos] = await Promise.all([
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}`,  { cache: "no-store" }),
+    fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`,  { cache: "no-store" }),
+    fetch(`https://jsonplaceholder.typicode.com/todos?userId=${id}`,  { cache: "no-store" }),
+  ]);
 
-  if (!fetchDetail.ok){
-    throw new Error("Failed to fetch User Detail")
+  if (!fetchUsers.ok || !fetchPosts.ok || !fetchTodos.ok) {
+    throw new Error("Failed to fetch data");
   }
 
-  return fetchDetail.json();
+  const user: User = await fetchUsers.json();
+  const posts: Post[] = await fetchPosts.json();
+  const todos: Todo[] = await fetchTodos.json();
+
+  return { user, posts, todos };
 }
 
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const { id } = await params;
-  const user = await getUserDetail(id);
-
+  const { user } = await getUserDetail(id);
+  
   return {
     title: `User detail - ${user.name}`,
     description: `User detail - ${user.name} from ${user.company.name}`
@@ -52,11 +35,11 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
 export default async function UserDetailPage({ params }: { params: { id: string } }) {
   const { id } = await params;
-  const user = await getUserDetail(id);
+  const { user, posts, todos } = await getUserDetail(id);
 
   return (
-    <main className="max-w-4xl mx-auto py-16">
-      <Link href="/users" className="text-sm text-gray-300 hover:underline">&larr; Back to list</Link>
+    <main className="max-w-4xl mx-auto py-16 px-6">
+      <BackButton/>
 
       <div>
         <header>
@@ -97,7 +80,37 @@ export default async function UserDetailPage({ params }: { params: { id: string 
               "{user.company.catchPhrase}"
             </p>
           </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-blue-700 pt-8 mt-12">
+          <div>
+            <h2 className="text-xs font-bold uppercase text-blue-500 mb-4">Task List (Todos)
+            <span className="mx-4 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+              {todos.filter(t => t.completed).length} / {todos.length} Done
+            </span>
+            </h2>
+            <ul className="max-h-80 overflow-y-auto space-y-2 pr-2">
+              {todos.map(todo => (
+                <li key={todo.id} className="flex items-start gap-2 text-sm bg-zinc-50 dark:bg-zinc-900 p-2 rounded">
+                  <input type="checkbox" checked={todo.completed} readOnly className="mt-1" />
+                  <span className={todo.completed ? "line-through text-gray-500" : ""}>
+                    {todo.title}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
+          <div>
+            <h2 className="text-xs font-bold uppercase text-blue-500 mb-4">Recent Posts ({posts.length})</h2>
+            <div className="max-h-80 overflow-y-auto space-y-4 pr-2">
+              {posts.map(post => (
+                <div key={post.id} className="bg-zinc-50 dark:bg-zinc-900 p-3 rounded">
+                  <h3 className="font-bold text-sm mb-1 truncate">{post.title}</h3>
+                  <p className="text-xs text-gray-400 line-clamp-2">{post.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </main>
